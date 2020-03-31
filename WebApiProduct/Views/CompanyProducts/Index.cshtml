@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebApiProduct.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+</br></br>
+<h1>Index</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+
+</p>
+<div class="row">
+    @using (Html.BeginForm("Index", "CompanyProducts", FormMethod.Get))
+    {
+        @Html.TextBox("searching")
+        <input type="submit" value="Search" />
+    }
+    Insert 0 to display All data, id for specific data
+    if there is not data there will be not matching 
+</div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImgUri1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td>
+                        No Matching Any Document
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImgUri1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+            }
+        </tbody>
+
+    </table>
+
+
+
+
