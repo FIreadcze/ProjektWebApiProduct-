@@ -20,17 +20,9 @@ namespace WebApiProduct.Controllers
         //GET: CompanyProducts
         public async Task<IActionResult> Index(int searching)
         {
+            return View(await _context.Products.Where(x => x.Id.Equals(searching) || searching.Equals(0) ).ToListAsync());
 
-            //return View(await _context.Products.ToListAsync());
-            return View(await _context.Products.Where(x => x.Id.Equals(searching) || searching==0 ).ToListAsync());
         }
-        //kopie
-        //public async Task<IActionResult> Index(string searching)
-        //{
-
-        //    //return View(await _context.Products.ToListAsync());
-        //    return View(await _context.Products.Where(x => x.Name.Contains(searching) || searching == null).ToListAsync());
-        //}
 
         // GET: CompanyProducts/Details/5
         public async Task<IActionResult> Details(int? id)
